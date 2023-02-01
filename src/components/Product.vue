@@ -2,7 +2,7 @@
   <div
     class="bg-cover min-h-[500px] w-1/2 p-5 relative"
     :style="{
-       'background-color': mediaType === 'background' ? backgroundColor : mediaType !== 'image' ? backgroundColorDesktop : '',
+      'background-color': mediaType === 'background' &&  backgroundColorDesktop,
       'background-size': 'cover',
       'background-size': 'cover',
       'background-position': 'center',
@@ -23,10 +23,10 @@
         bottom: device === 'mobile' ? '0' : 'auto',
         left: '0',
         right: '0',
-        top: textPosition.includes('top') ? '0' : 'auto',
-        bottom: textPosition.includes('bottom') ? '0' : 'auto',
-        left: textPosition.includes('left') ? '0' : 'auto',
-        right: textPosition.includes('right') ? '0' : 'auto',
+        top: textPositionD.includes('top') ? '0' : 'auto',
+        bottom: textPositionD.includes('bottom') ? '0' : 'auto',
+        left: textPositionM.includes('left') ? '0' : 'auto',
+        right: textPositionM.includes('right') ? '0' : 'auto',
       }"
     >
       <p class="font-medium leading-5">{{ product.name }}</p>

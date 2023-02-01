@@ -7,6 +7,9 @@
       :backgroundColorTablet="backgroundColorTablet" 
       :backgroundColorMobile="backgroundColorMobile" 
       :textColor="textColor"
+      :mediaType="mediaType"
+      :textPositionD="textPositionD"
+      :textPositionM="textPositionM"
     />
   </div>
 </template>
@@ -20,6 +23,7 @@ export default {
     Product,
   },
   data() {
+    console.log('>>>>', data.textPositionD)
     return {
       product: data.product,
       picture: data.picture,

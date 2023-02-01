@@ -7,7 +7,7 @@ export default {
       "imageMobile": "image/RectangleMobile.png",
     },
    "textColor": "#fff",
-   "textPositionD": "bottom-left",
+   "textPositionD": "top-left",
    "textPositionM": "bottom-left",
    "product": {
      "name": "Lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
