@@ -2,12 +2,12 @@ export default {
   "cardLink": "/#",
   "mediaType": "image",
   "picture": {
-      "imageDesktop": "image/Rectangle.jpg",
-      "imageTablet": "image/Rectangle.jpg",
-      "imageMobile": "image/Rectangle.jpg",
+      "imageDesktop": "image/RectangleMobile.png",
+      "imageTablet": "image/RectangleMobile.png",
+      "imageMobile": "image/RectangleMobile.png",
     },
-   "textColor": "#000000",
-   "textPositionD": "top-left",
+   "textColor": "#fff",
+   "textPositionD": "bottom-left",
    "textPositionM": "bottom-left",
    "product": {
      "name": "Lorem ipsum dolor sit amet lorem ipsum dolor sit amet",

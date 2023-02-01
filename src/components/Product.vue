@@ -1,17 +1,19 @@
 <template>
   <div
-    class="h-screen w-full bg-cover p-5 relative"
+    class="bg-cover min-h-[500px] w-1/2 p-5 relative"
     :style="{
-      'background-color': backgroundColor,
+       'background-color': mediaType === 'background' ? backgroundColor : mediaType !== 'image' ? backgroundColorDesktop : '',
+      'background-size': 'cover',
       'background-size': 'cover',
       'background-position': 'center',
     }"
     ref="product"
   >
     <img
+      v-if="mediaType === 'image'"
       :src="image"
-      alt=" picture"
-      class="absolute top-0 left-0 bottom-0 right-0 object-fill "
+      alt="picture"
+      class="absolute top-0 left-0 bottom-0 right-0 object-fill"
     />
     <div
       class="all-details absolute"
@@ -21,8 +23,10 @@
         bottom: device === 'mobile' ? '0' : 'auto',
         left: '0',
         right: '0',
-        padding: '20px',
-        
+        top: textPosition.includes('top') ? '0' : 'auto',
+        bottom: textPosition.includes('bottom') ? '0' : 'auto',
+        left: textPosition.includes('left') ? '0' : 'auto',
+        right: textPosition.includes('right') ? '0' : 'auto',
       }"
     >
       <p class="font-medium leading-5">{{ product.name }}</p>
@@ -40,6 +44,8 @@
   </div>
 </template>
 
+
+
 <script>
 export default {
   name: "Product",
@@ -50,6 +56,9 @@ export default {
     backgroundColorTablet: String,
     backgroundColorMobile: String,
     textColor: String,
+    mediaType: String,
+    textPositionD: String,
+    textPositionM: String,
   },
   data() {
     return {
@@ -59,6 +68,7 @@ export default {
   computed: {
     image() {
       let width = window.innerWidth;
+      if (!this.picture) return "default-background.jpg";
       if (width <= 500) {
         this.device = "mobile";
         return `${this.picture.imageMobile}`;
@@ -81,7 +91,12 @@ export default {
       }
     },
     textPosition() {
-      return this.device === "mobile" ? "bottom-left" : "top-left";
+      switch (this.device) {
+        case "mobile":
+          return this.textPositionM || "";
+        case "desktop":
+          return this.textPositionD || "";
+      }
     },
   },
   mounted() {

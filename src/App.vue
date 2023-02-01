@@ -26,7 +26,11 @@ export default {
       backgroundColorDesktop: data.backgroundColorDesktop,
       backgroundColorTablet: data.backgroundColorTablet,
       backgroundColorMobile: data.backgroundColorMobile,
-      textColor: data.textColor
+      textColor: data.textColor,
+      mediaType:data.mediaType,
+      textPositionD: data.textPositionD,
+      textPositionM: data.textPositionM,
+
     };
   },
 };
