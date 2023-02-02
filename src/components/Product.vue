@@ -6,6 +6,8 @@
       'background-size': 'cover',
       'background-size': 'cover',
       'background-position': 'center',
+      'min-height': device === 'mobile' ? '500px' : '',
+      'width': device === 'mobile' ? '80%' : '50%'
     }"
     ref="product"
   >
@@ -23,14 +25,14 @@
         bottom: device === 'mobile' ? '0' : 'auto',
         left: '0',
         right: '0',
-        padding:'20px',
+        padding:'10px',
         top: textPositionD.includes('top') ? '0' : 'auto',
         bottom: textPositionD.includes('bottom') ? '0' : 'auto',
         left: textPositionM.includes('left') ? '0' : 'auto',
         right: textPositionM.includes('right') ? '0' : 'auto',
       }"
     >
-      <p class="font-medium text-sm leading-1rem">{{ product.name }}</p>
+      <p class="font-medium text-sm leading-1rem">{{displayName}}</p>
       <div class="description font-normal">
         <span class="font-normal text-sm leading-1rem">{{ product.priceOriginal }}</span>
         <span class="font-normal text-xs leading-1rem px-2 line-through">{{ product.price }}</span>
@@ -67,6 +69,10 @@ export default {
     };
   },
   computed: {
+    displayName() {
+    return this.device === 'mobile' ? 'Lorem ipsum dolor sit amet' : this.product.name;
+  },
+
     image() {
       let width = window.innerWidth;
       if (!this.picture) return "default-background.jpg";
@@ -81,6 +87,7 @@ export default {
         return `${this.picture.imageDesktop}`;
       }
     },
+    
     backgroundColor() {
       let width = window.innerWidth;
       if (width <= 500) {
@@ -113,3 +120,5 @@ export default {
   },
 };
 </script>
+
+
