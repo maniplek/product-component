@@ -2,11 +2,11 @@ export default {
   "cardLink": "/#",
   "mediaType": "image",
   "picture": {
-      "imageDesktop": "image/RectangleMobile.png",
-      "imageTablet": "image/RectangleMobile.png",
-      "imageMobile": "image/RectangleMobile.png",
+      "imageDesktop": "image/Rectangle.jpg",
+      "imageTablet": "image/Rectangle.jpg",
+      "imageMobile": "image/Rectangle.jpg",
     },
-   "textColor": "#fff",
+   "textColor": "#FF0000",
    "textPositionD": "top-left",
    "textPositionM": "bottom-left",
    "product": {

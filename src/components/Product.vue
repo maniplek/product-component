@@ -23,23 +23,24 @@
         bottom: device === 'mobile' ? '0' : 'auto',
         left: '0',
         right: '0',
+        padding:'20px',
         top: textPositionD.includes('top') ? '0' : 'auto',
         bottom: textPositionD.includes('bottom') ? '0' : 'auto',
         left: textPositionM.includes('left') ? '0' : 'auto',
         right: textPositionM.includes('right') ? '0' : 'auto',
       }"
     >
-      <p class="font-medium leading-5">{{ product.name }}</p>
+      <p class="font-medium text-sm leading-1rem">{{ product.name }}</p>
       <div class="description font-normal">
-        <span class="">{{ product.priceOriginal }}</span>
-        <span class="px-2 line-through">{{ product.price }}</span>
-        <span class="px-2">-{{ product.discount }}</span>
+        <span class="font-normal text-sm leading-1rem">{{ product.priceOriginal }}</span>
+        <span class="font-normal text-xs leading-1rem px-2 line-through">{{ product.price }}</span>
+        <span class="font-normal text-xs leading-1rem px-2">-{{ product.discount }}</span>
       </div>
-      <div class="availability font-normal">
-        <p v-if="product.isAvailable == true">AVAILABLE</p>
-        <p v-if="product.isAvailable == false">AVAILABLE SOON</p>
+      <div class="availability">
+        <p class="font-normal text-xs leading-4" v-if="product.isAvailable == true">AVAILABLE</p>
+        <p class="font-normal text-xs leading-4" v-if="product.isAvailable == false">AVAILABLE SOON</p>
       </div>
-      <p>{{ product.colors }} COLORS</p>
+      <p class="font-normal text-xs leading-4" >{{ product.colors }} COLORS</p>
     </div>
   </div>
 </template>
