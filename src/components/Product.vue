@@ -1,13 +1,17 @@
 <template>
   <div
-    class="bg-cover min-h-[500px] w-1/2 p-5 relative"
+    class="relative"
+    :class=" {
+      'h-[500px] w-1/2': mediaType === 'background',
+      'w-fit': mediaType === 'image',
+    }"
     :style="{
       'background-color': mediaType === 'background' &&  backgroundColorDesktop,
       'background-size': 'cover',
       'background-size': 'cover',
       'background-position': 'center',
-      'min-height': device === 'mobile' ? '500px' : '',
-      'width': device === 'mobile' ? '80%' : '50%'
+      // 'min-height': device === 'mobile' ? '500px' : '',
+      // 'width': device === 'mobile' ? '80%' : '50%'
     }"
     ref="product"
   >
@@ -15,21 +19,24 @@
       v-if="mediaType === 'image'"
       :src="image"
       alt="picture"
-      class="absolute top-0 left-0 bottom-0 right-0 object-fill"
+      class="object-cover"
     />
     <div
-      class="all-details absolute"
+      class="all-details absolute p-5"
+      :class="{
+        [textPosition]: textPosition,
+      }"
       :style="{
         color: textColor,
-        top: device === 'desktop' ? '0' : 'auto',
-        bottom: device === 'mobile' ? '0' : 'auto',
-        left: '0',
-        right: '0',
-        padding:'10px',
-        top: textPositionD.includes('top') ? '0' : 'auto',
-        bottom: textPositionD.includes('bottom') ? '0' : 'auto',
-        left: textPositionM.includes('left') ? '0' : 'auto',
-        right: textPositionM.includes('right') ? '0' : 'auto',
+        // top: device === 'desktop' ? '0' : 'auto',
+        // bottom: device === 'mobile' ? '0' : 'auto',
+        // left: '0',
+        // right: '0',
+        // padding:'10px',
+        // top: textPositionD.includes('top') ? '0' : 'auto',
+        // bottom: textPositionD.includes('bottom') ? '0' : 'auto',
+        // left: textPositionM.includes('left') ? '0' : 'auto',
+        // right: textPositionM.includes('right') ? '0' : 'auto',
       }"
     >
       <p class="font-medium text-sm leading-1rem">{{displayName}}</p>
@@ -70,20 +77,15 @@ export default {
   },
   computed: {
     displayName() {
-    return this.device === 'mobile' ? 'Lorem ipsum dolor sit amet' : this.product.name;
-  },
-
+      return this.device === 'mobile' ? 'Lorem ipsum dolor sit amet' : this.product.name;
+    },
     image() {
-      let width = window.innerWidth;
       if (!this.picture) return "default-background.jpg";
-      if (width <= 500) {
-        this.device = "mobile";
+      if (this.device === "mobile") {
         return `${this.picture.imageMobile}`;
-      } else if (width <= 1024) {
-        this.device = "tablet";
+      } else if (this.device === "tablet") {
         return `${this.picture.imageTablet}`;
       } else {
-        this.device = "desktop";
         return `${this.picture.imageDesktop}`;
       }
     },
@@ -101,13 +103,16 @@ export default {
     textPosition() {
       switch (this.device) {
         case "mobile":
-          return this.textPositionM || "";
+          const positionM = this.textPositionM.split("-");
+          return positionM[0] + '-0' + " " + positionM[1] + '-0';
         case "desktop":
-          return this.textPositionD || "";
+          const positionD = this.textPositionD.split("-");
+          return positionD[0] + '-0' + " " + positionD[1] + '-0';
       }
     },
   },
   mounted() {
+    this.handleResize();
     window.addEventListener("resize", this.handleResize);
   },
   beforeDestroy() {
@@ -115,7 +120,13 @@ export default {
   },
   methods: {
     handleResize() {
-      this.device = window.innerWidth <= 500 ? "mobile" : "desktop";
+      if(window.innerWidth >= 1024) {
+        this.device = 'desktop';
+      } else if(window.innerWidth >= 768 && window.innerWidth <= 1024) {
+        this.device = 'tablet';
+      } else {
+        this.device = 'mobile';
+      }
     },
   },
 };
